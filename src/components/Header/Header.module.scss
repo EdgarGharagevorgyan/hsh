@@ -1,18 +1,20 @@
 .headerContainer {
-  height: calc(100vh - 20px);
-  min-width: calc(100% - 40px);
+  height: 90%;
+  width: 100%;
 
   display: flex;
-  justify-content: center;
-  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 
   background: url(../../assets/images/textures/banner-image-1.jpg);
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   background-attachment: fixed;
 
   overflow: hidden;
+  padding: 20px 20px 0px 20px;
 }
 
 .header {
@@ -20,9 +22,9 @@
 
   max-width: 1245px;
   width: 100%;
-  height: 125px;
+  height: 110px;
 
-  padding: 40px 20px 20px;
+  padding: 20px ;
 
   display: flex;
   justify-content: space-between;
@@ -70,3 +72,40 @@
 .smLinks a img {
   height: 15px;
 }
+
+.headerBody {
+  max-width: 1245px;
+  width: 100%;
+  height: 100%;
+
+  padding: 0px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 15px;
+}
+
+.line {
+  background: #b79b6a;
+  width: 30px;
+  height: 5px;
+}
+
+.headerBody h1 {
+  width: 400px;
+  font-size: 62px;
+  line-height: 60px;
+  font-weight: 800;
+  padding: 20px 0;
+}
+
+.headerBody h2 {
+  width: 440px;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 14px 0;
+}
+
+
