@@ -1,0 +1,55 @@
+.LoadingBg {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes spinAndPulse {
+  0% {
+    width: 64px;
+    height: 64px;
+    transform: rotate(0deg);
+  }
+  50% {
+    width: 30px;
+    height: 30px;
+    transform: rotate(180deg);
+  }
+  100% {
+    width: 64px;
+    height: 64px;
+    transform: rotate(360deg);
+  }
+}
+
+.Loading {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  background-image: radial-gradient(circle 8px, #B79B6A 100%, transparent 0),
+    radial-gradient(circle 8px, #B79B6A 100%, transparent 0),
+    radial-gradient(circle 8px, #B79B6A 100%, transparent 0);
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position:
+    center top,
+    right 10% bottom 15%,
+    left 10% bottom 15%;
+  animation: spinAndPulse 1s linear infinite;
+}

@@ -1,0 +1,31 @@
+/* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
+import styles from "./Header.module.scss";
+
+export default function Header() {
+  return (
+    <header className={styles.headerContainer}>
+      <div className={styles.header}>
+        <div className={styles.logo}>
+          <img src="/hsh-logo.svg" alt="Logo" />
+        </div>
+        <nav className={styles.nav}>
+          <Link href="/">ԳԼԽԱՎՈՐ</Link>
+          <Link href="/about">ՄԵՐ ՄԱՍԻՆ</Link>
+          <Link href="/services">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ</Link>
+          <Link href="/clients">ՀԱՃԱԽՈՐԴՆԵՐ</Link>
+          <Link href="/contact">ԿԱՊ ՄԵԶ ՀԵՏ</Link>
+          <Link href="/gallery">ԳԱԼԵՐԻԱ</Link>
+        </nav>
+        <div className={styles.smLinks}>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/facebook-f-111.svg" alt="Facebook" className={styles.smIcon} />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <img src="/icons/instagram-111.svg" alt="Instagram" className={styles.smIcon} />
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}

@@ -1,0 +1,71 @@
+.frame {
+  position: fixed;
+  background-color: #ccc;
+  opacity: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Top */
+.frame-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  animation: grow-top 0.3s 2s forwards;
+}
+
+/* Right */
+.frame-right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  animation: grow-right 0.6s 2s forwards;
+}
+
+/* Bottom */
+.frame-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  animation: grow-bottom 0.9s 2s forwards;
+}
+
+/* Left */
+.frame-left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  animation: grow-left 1.2s 2s forwards;
+}
+
+@keyframes grow-top {
+  to {
+    height: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes grow-right {
+  to {
+    width: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes grow-bottom {
+  to {
+    height: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes grow-left {
+  to {
+    width: 20px;
+    opacity: 1;
+  }
+}
