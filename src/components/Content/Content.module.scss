@@ -1,0 +1,114 @@
+.contentContainer {
+  width: 100%;
+  padding: 100px 20px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.contentInner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  max-width: 1245px;
+}
+
+.info {
+  flex: 1 1 300px;
+  max-width: 420px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info h3 {
+  width: 250px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.info h2 {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.line {
+  display: block;
+  background: #b79b6a;
+  width: 30px;
+  height: 5px;
+}
+
+.info p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 25px;
+  color: #9c9c9c;
+}
+
+.infoCells {
+  flex: 2 1 500px;
+  // max-width: 700px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.infoCells div {
+  width: calc(50% - 20px);
+  // height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.infoCells div img {
+  width: 30px;
+  height: 30px;
+}
+
+.infoCells div h4 {
+  padding: 5px 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.infoCells div p {
+  line-height: 25px;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+@media (max-width: 965px) {
+  .contentInner {
+    justify-content: center;
+  }
+
+  .info{
+    max-width: unset;
+    width: 100%;
+  }
+
+  .info h3{
+    width: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .infoCells div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .info h2{
+    font-size: 30px;
+  }
+}

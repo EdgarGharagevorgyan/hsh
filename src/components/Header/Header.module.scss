@@ -44,6 +44,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 10px;
 }
 
 .nav a {
@@ -88,6 +89,7 @@
 }
 
 .line {
+  display: block;
   background: #b79b6a;
   width: 30px;
   height: 5px;
@@ -109,3 +111,31 @@
 }
 
 
+@media (max-width: 1080px) {
+
+}
+
+@media (max-width: 750px) {
+  .headerBody{
+    padding: 20px;
+  }
+
+  .headerBody h1{
+    width: 100%;
+    word-break: break-word;
+    font-size: 60px;
+  }
+
+  .headerBody h2{
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerBody h1{
+    font-size: 40px;
+  }
+  .headerBody h2{
+    font-size: 16px;
+  }
+}
