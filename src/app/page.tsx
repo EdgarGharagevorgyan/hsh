@@ -6,6 +6,7 @@ import Frame from "@/components/Frame";
 import Loading from "@/components/Loading";
 import Content from "@/components/Content";
 import Footer from "@/components/Footer";
+import BackToTopButton from "@/components/BackToTopButton";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,8 @@ export default function Home() {
            <Frame />
            <Header />
            <Content />
-           <Footer/>
+           <Footer />
+           <BackToTopButton/>
         </div>
      </>
   );
