@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 import Header from "@/components/Header";
 import Frame from "@/components/Frame";
 import Loading from "@/components/Loading";
-import Content from "@/components/Content/ContentInfo";
+import Content from "@/components/Content";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +23,7 @@ export default function Home() {
       >
         <Frame />
         <Header />
-        <Content/>
+        <Content />
       </div>
     </>
   );
