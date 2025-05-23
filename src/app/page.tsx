@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Frame from "@/components/Frame";
 import Loading from "@/components/Loading";
 import Content from "@/components/Content";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,16 +16,17 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Loading visible={isLoading} />
-      <div
-        className={styles.container}
-        style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.5s ease" }}
-      >
-        <Frame />
-        <Header />
-        <Content />
-      </div>
-    </>
+     <>
+        <Loading visible={isLoading} />
+        <div
+           className={styles.container}
+           style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.5s ease" }}
+        >
+           <Frame />
+           <Header />
+           <Content />
+           <Footer/>
+        </div>
+     </>
   );
 }

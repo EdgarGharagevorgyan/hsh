@@ -1,0 +1,39 @@
+.footer {
+   background-color: #f9f9f9;
+   padding: 40px 20px;
+
+   .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      max-width: 1245px;
+      width: 100%;
+      margin: 0 auto;
+
+   }
+
+   .text {
+      font-weight: 500;
+   }
+
+   .socials {
+      display: flex;
+      gap: 10px;
+
+      .smIcon {
+         width: 15px;
+         height: 15px;
+      }
+   }
+}
+@media (max-width: 1300px) {
+   .footer {
+      padding: 40px 40px 60px 40px;
+   }
+}
+
+@media (max-width: 1000px) {
+   .footer {
+   padding: 20px 40px;
+   }
+}

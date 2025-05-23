@@ -1,0 +1,94 @@
+.productsContainer {
+   max-width: 1245px;
+   padding: 0px 20px 120px 20px;
+   margin: 0 auto;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 25px;
+}
+
+.productsInfo {
+   flex: 1 1 300px;
+   min-width: 250px;
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.line {
+   background: rgb(183, 155, 106);
+   width: 30px;
+   height: 5px;
+   display: block;
+}
+
+.productsTable {
+   flex: 2 1 500px;
+   min-width: 300px;
+   list-style: none;
+   padding: 0;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+}
+
+.productItem {
+   width: 33.3333%;
+   height: 150px;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+   cursor: pointer;
+   transition: all 0.3s ease;
+
+   &::before {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: var(--bg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 1;
+      transition: opacity 0.3s ease;
+   }
+
+   span {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.8);
+   }
+
+   &:hover span {
+      display: flex;
+   }
+
+   @media (max-width: 992px) {
+      width: 50%;
+   }
+
+   @media (max-width: 576px) {
+      width: 100%;
+   }
+}
+
+@media (max-width: 1300px) {
+   .productsContainer {
+      padding: 0px 40px 120px 40px;
+   }
+}
