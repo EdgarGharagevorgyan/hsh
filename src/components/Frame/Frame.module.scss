@@ -6,7 +6,6 @@
   pointer-events: none;
 }
 
-/* Top */
 .frame-top {
   top: 0;
   left: 0;
@@ -16,7 +15,6 @@
   animation-delay: 2.5s;
 }
 
-/* Right */
 .frame-right {
   top: 0;
   right: 0;
@@ -26,7 +24,6 @@
   animation-delay: 2.5s;
 }
 
-/* Bottom */
 .frame-bottom {
   bottom: 0;
   left: 0;
@@ -36,7 +33,6 @@
   animation-delay: 2.5s;
 }
 
-/* Left */
 .frame-left {
   top: 0;
   left: 0;
@@ -46,7 +42,6 @@
   animation-delay: 2.5s;
 }
 
-/* Keyframes with opacity from 0 to 1 */
 @keyframes grow-top {
   0% {
     height: 0;

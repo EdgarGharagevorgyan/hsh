@@ -9,7 +9,7 @@ export default function Header() {
    useEffect(() => {
       const handleScroll = () => {
          const scrollY = window.scrollY;
-         setIsSticky(scrollY > 300); // adjust based on your layout
+         setIsSticky(scrollY > 700); 
       };
 
       window.addEventListener("scroll", handleScroll);
