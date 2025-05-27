@@ -17,7 +17,7 @@ const productItems = [
 
 export default function ContentProducts() {
    return (
-      <div className={styles.productsContainer}>
+      <div id="clients" className={styles.productsContainer}>
          <div className={styles.productsInfo}>
             <h2>Ապրանքատեսակներ</h2>
             <span className={styles.line}></span>

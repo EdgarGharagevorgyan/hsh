@@ -18,17 +18,17 @@ export default function Header() {
 
    return (
       <>
-         <header className={styles.headerContainer}>
+         <header id="home" className={styles.headerContainer}>
             <div className={styles.header}>
                <div className={styles.logo}>
                   <img src="/hsh-logo.svg" alt="Logo" />
                </div>
                <nav className={styles.nav}>
-                  <Link href="/">ԳԼԽԱՎՈՐ</Link>
-                  <Link href="/about">ՄԵՐ ՄԱՍԻՆ</Link>
-                  <Link href="/services">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ</Link>
-                  <Link href="/clients">ՀԱՃԱԽՈՐԴՆԵՐ</Link>
-                  <Link href="/contact">ԿԱՊ ՄԵԶ ՀԵՏ</Link>
+                  <Link href="#home">ԳԼԽԱՎՈՐ</Link>
+                  <Link href="#about">ՄԵՐ ՄԱՍԻՆ</Link>
+                  <Link href="#services">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ</Link>
+                  <Link href="#clients">ՀԱՃԱԽՈՐԴՆԵՐ</Link>
+                  <Link href="#contact">ԿԱՊ ՄԵԶ ՀԵՏ</Link>
                   <Link href="/gallery">ԳԱԼԵՐԻԱ</Link>
                </nav>
                <div className={styles.smLinks}>
@@ -66,11 +66,11 @@ export default function Header() {
                   <img src="/hsh-logo.svg" alt="Logo" />
                </div>
                <nav className={styles.nav}>
-                  <Link href="/">ԳԼԽԱՎՈՐ</Link>
-                  <Link href="/about">ՄԵՐ ՄԱՍԻՆ</Link>
-                  <Link href="/services">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ</Link>
-                  <Link href="/clients">ՀԱՃԱԽՈՐԴՆԵՐ</Link>
-                  <Link href="/contact">ԿԱՊ ՄԵԶ ՀԵՏ</Link>
+                  <Link href="#home">ԳԼԽԱՎՈՐ</Link>
+                  <Link href="#about">ՄԵՐ ՄԱՍԻՆ</Link>
+                  <Link href="#services">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ</Link>
+                  <Link href="#clients">ՀԱՃԱԽՈՐԴՆԵՐ</Link>
+                  <Link href="#contact">ԿԱՊ ՄԵԶ ՀԵՏ</Link>
                   <Link href="/gallery">ԳԱԼԵՐԻԱ</Link>
                </nav>
                <div className={styles.smLinks}>

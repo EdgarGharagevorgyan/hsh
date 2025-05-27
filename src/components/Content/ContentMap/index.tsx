@@ -26,7 +26,7 @@ export default function ContentMap() {
 
    return (
       <div ref={wrapperRef} className={`${styles.bgWrapper} ${isVisible ? styles.show : ""}`}>
-         <div className={styles.mapContainer}>
+         <div id="contact" className={styles.mapContainer}>
             <h2>Կապ հաստատեք մեզ հետ՝ զանգահարելով կամ պարզապես լրացնելով այս ձևը</h2>
             <span className={styles.line}></span>
 
