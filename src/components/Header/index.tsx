@@ -61,7 +61,7 @@ export default function Header() {
          </header>
 
          {isSticky && (
-            <div className={styles.stickyHeader}>
+            <div className={`${styles.stickyHeader} ${styles.stickyEnter}`}>
                <div className={styles.logo}>
                   <img src="/hsh-logo.svg" alt="Logo" />
                </div>
