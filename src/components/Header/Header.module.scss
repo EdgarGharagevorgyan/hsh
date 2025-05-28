@@ -54,6 +54,11 @@
    text-decoration: none;
 }
 
+.nav a:hover{
+   color: #b79b6a !important;
+   border-bottom: 1px solid #b79b6a;
+}
+
 .smLinks {
    display: flex;
    gap: 10px;
