@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import Header from "@/components/Header";
-import MobileHeader from "@/components/Header/MobileHeader";
+import MobileHeader from "@/components/Header/MobileHeader"; 
 import Frame from "@/components/Frame";
 import Loading from "@/components/Loading";
 import Content from "@/components/Content";
@@ -11,17 +11,15 @@ import BackToTopButton from "@/components/BackToTopButton";
 
 export default function Home() {
    const [isLoading, setIsLoading] = useState(true);
-   const [isDesktop, setIsDesktop] = useState(true);
+   const [isDesktop, setIsDesktop] = useState(true); 
 
-   useEffect(() => {
+   useEffect(() => { 
       const handleResize = () => {
          setIsDesktop(window.innerWidth > 1060);
       };
 
-      // Set initial value
       handleResize();
 
-      // Listen to resize
       window.addEventListener("resize", handleResize);
 
       return () => window.removeEventListener("resize", handleResize);
