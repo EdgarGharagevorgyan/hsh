@@ -9,7 +9,7 @@ uploads/
 logs/
 
 # Environment files
-.env
+.vscode
 
 # System files
 .DS_Store
