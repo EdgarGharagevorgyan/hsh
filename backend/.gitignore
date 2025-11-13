@@ -2,7 +2,7 @@
 node_modules/
 
 # Uploaded files
-uploads/
+# uploads/
 
 # Logs
 *.log

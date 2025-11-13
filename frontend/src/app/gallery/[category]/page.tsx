@@ -9,20 +9,19 @@ interface Props {
 }
 
 export default async function CategoryPage({ params }: Props) {
-   const { category } = params;
+   const category = params?.category;
 
-   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-   const res = await fetch(`${baseUrl}/api/gallery/${category}`, {
-      cache: "no-store",
-   });
+   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+   const res = await fetch(`${BACKEND_URL}/admin/get-images-by`, { cache: "no-store" });
 
    if (!res.ok) {
-      const errorText = await res.text(); 
+      const errorText = await res.text();
       console.error("API response error:", errorText);
       throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
    }
 
-   const items = await res.json();
+   const data = await res.json();
+   const items = data.imagesBy[category] || [];
 
    return (
       <>

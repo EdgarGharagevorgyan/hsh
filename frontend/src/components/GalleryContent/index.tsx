@@ -1,17 +1,32 @@
-/* eslint-disable @next/next/no-img-element */
+"use client";
+
+import Image from "next/image";
 import styles from "./GalleryContent.module.scss";
 
-export default function GalleryContent({
-   items,
-}: {
-   items: { id: number; title: string; image: string }[];
-}) {
+type ImageItem = {
+   category: string;
+   filename: string;
+   url: string;
+};
+
+interface GalleryContentProps {
+   items: ImageItem[];
+}
+
+export default function GalleryContent({ items }: GalleryContentProps) {
+   if (!items || !items.length) return <p>No images found.</p>;
+
    return (
       <div className={styles.galleryGrid}>
-         {items.map((item) => (
-            <div key={item.id} className={styles.galleryItem}>
-               <img src={item.image} alt={item.title} />
-               <p>{item.title}</p>
+         {items.map(item => (
+            <div key={item.filename} className={styles.galleryItem}>
+               <Image
+                  src={item.url}
+                  alt={item.filename}
+                  width={300}
+                  height={300}
+                  style={{ objectFit: "cover" }}
+               />
             </div>
          ))}
       </div>
