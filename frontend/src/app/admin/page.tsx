@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import styles from "./admin.module.scss";
 
 type ImageItem = {
    category: string;
@@ -10,16 +11,10 @@ type ImageItem = {
 };
 
 export default function AdminPage() {
-   /* ------------------------------------------------------------------ */
-   /* 1. Backend URL – MUST be public in .env.local */
-   /* ------------------------------------------------------------------ */
    const BACKEND_URL =
       process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") ||
       "http://localhost:5000";
 
-   /* ------------------------------------------------------------------ */
-   /* 2. State */
-   /* ------------------------------------------------------------------ */
    const [images, setImages] = useState<Record<string, ImageItem[]>>({});
    const [categories, setCategories] = useState<string[]>([]);
    const [files, setFiles] = useState<FileList | null>(null);
@@ -28,10 +23,8 @@ export default function AdminPage() {
    const [showModal, setShowModal] = useState(false);
    const [isUploading, setIsUploading] = useState(false);
    const [error, setError] = useState<string | null>(null);
+   const [rawCategoryInput, setRawCategoryInput] = useState("");
 
-   /* ------------------------------------------------------------------ */
-   /* 3. API helpers */
-   /* ------------------------------------------------------------------ */
    const fetchImages = useCallback(async () => {
       try {
          const res = await fetch(`${BACKEND_URL}/admin/get-images-by`);
@@ -52,19 +45,13 @@ export default function AdminPage() {
       }
    }, [BACKEND_URL]);
 
-   /* ------------------------------------------------------------------ */
-   /* 4. Effects – load once + after every mutation */
-   /* ------------------------------------------------------------------ */
    useEffect(() => {
       fetchImages();
       fetchCategories();
    }, [fetchImages, fetchCategories]);
 
-   /* ------------------------------------------------------------------ */
-   /* 5. Add new category */
-   /* ------------------------------------------------------------------ */
    const handleAddCategory = async () => {
-      if (!newCategory.trim()) return setError("Enter a category name");
+      if (!newCategory.trim()) return setError("Մուտքագրեք կատեգորիայի անունը");
 
       const res = await fetch(`${BACKEND_URL}/admin/add-category`, {
          method: "POST",
@@ -75,18 +62,19 @@ export default function AdminPage() {
       const data = await res.json();
       if (res.ok) {
          setNewCategory("");
-         fetchCategories();
+         setRawCategoryInput(""); 
+         setError(null);
+
+         await Promise.all([fetchCategories(), fetchImages()]);
+         setSelectedCategory(newCategory.trim());
       } else {
-         setError(data.message ?? "Failed to add category");
+         setError(data.message ?? "Չհաջողվեց ավելացնել կատեգորիան");
       }
    };
 
-   /* ------------------------------------------------------------------ */
-   /* 6. Upload images */
-   /* ------------------------------------------------------------------ */
    const handleUpload = async () => {
       if (!files?.length || !selectedCategory) {
-         return setError("Select a category and at least one file");
+         return setError("Ընտրեք կատեգորիա և առնվազն մեկ ֆայլ");
       }
 
       setIsUploading(true);
@@ -107,18 +95,15 @@ export default function AdminPage() {
          setFiles(null);
          setSelectedCategory("");
          setShowModal(false);
-         fetchImages(); // refresh gallery
+         fetchImages();
       } else {
          const data = await res.json();
-         setError(data.message ?? "Upload failed");
+         setError(data.message ?? "Վերբեռնումը ձախողվեց");
       }
    };
 
-   /* ------------------------------------------------------------------ */
-   /* 7. Delete image */
-   /* ------------------------------------------------------------------ */
    const handleDelete = async (category: string, filename: string) => {
-      const ok = window.confirm(`Delete ${filename}?`);
+      const ok = window.confirm(`Ջնջել ${filename}-ը ?`);
       if (!ok) return;
 
       const res = await fetch(
@@ -127,51 +112,108 @@ export default function AdminPage() {
       );
 
       if (res.ok) fetchImages();
-      else setError("Failed to delete");
+      else setError("Չհաջողվեց ջնջել");
    };
 
-   /* ------------------------------------------------------------------ */
-   /* 8. Render */
-   /* ------------------------------------------------------------------ */
    return (
-      <div style={{ padding: "2rem", fontFamily: "system-ui, sans-serif" }}>
-         <h1 style={{ marginBottom: "1.5rem" }}>Admin Panel</h1>
+      <div className={styles.container}>
+         <h1 className={styles.title}>Ադմինիստրատորի վահանակ</h1>
 
-         {/* ---------- Add Category ---------- */}
-         <section style={{ marginBottom: "1.5rem", display: "flex", gap: "0.5rem" }}>
+         <section className={styles.addCategorySection}>
             <input
                type="text"
-               placeholder="New category name"
-               value={newCategory}
-               onChange={(e) => setNewCategory(e.target.value)}
-               style={{ padding: "0.5rem", flex: 1 }}
+               placeholder="Նոր կատեգորիայի անվանումը"
+               value={rawCategoryInput}
+               onChange={(e) => {
+                  const raw = e.target.value;
+                  setRawCategoryInput(raw);
+
+                  const filtered = raw
+                     .replace(/[^ա-ևԱ-Ֆ\s]/g, "")
+                     .replace(/\s+/g, " ")
+                     .trimStart();
+
+                  setNewCategory(filtered);
+               }}
+               onKeyDown={(e) => {
+                  const key = e.key;
+                  const ctrl = e.ctrlKey || e.metaKey;
+                  const isArmenianLetter = /[ա-ևԱ-Ֆ]/.test(key);
+                  const isSpace = key === " ";
+                  const isBackspace = key === "Backspace";
+                  const isDelete = key === "Delete";
+                  const isArrow = /^Arrow(Left|Right|Up|Down)$/.test(key);
+                  const isHome = key === "Home";
+                  const isEnd = key === "End";
+                  const isSelectAll = ctrl && key === "a";
+                  const isCopy = ctrl && key === "c";
+                  const isTab = key === "Tab";
+                  const isEnter = key === "Enter";
+
+                  if (
+                     isArmenianLetter ||
+                     isSpace ||
+                     isBackspace ||
+                     isDelete ||
+                     isArrow ||
+                     isHome ||
+                     isEnd ||
+                     isSelectAll ||
+                     isCopy ||
+                     isTab ||
+                     isEnter
+                  ) {
+                     setError(null);
+                     return;
+                  }
+
+                  e.preventDefault();
+                  setError("Թույլատրվում է միայն հայերեն տառեր և բացատ");
+               }}
+               onPaste={(e) => {
+                  e.preventDefault();
+                  const text = e.clipboardData.getData("text");
+                  const filtered = text
+                     .replace(/[^ա-ևԱ-Ֆ\s]/g, "")
+                     .replace(/\s+/g, " ")
+                     .trimStart();
+
+                  const newValue = rawCategoryInput + filtered;
+                  setRawCategoryInput(newValue);
+                  setNewCategory(newValue);
+
+                  if (filtered !== text) {
+                     setError("Միայն հայերեն տառերը տեղադրվեցին");
+                  } else {
+                     setError(null);
+                  }
+               }}
+               className={styles.categoryInput}
+               autoComplete="off"
             />
-            <button onClick={handleAddCategory} style={btnStyle}>
-               Add Category
+
+            <button onClick={handleAddCategory} className={styles.uploadButton}>
+               Ավելացնել կատեգորիա
             </button>
          </section>
 
-         {/* ---------- Global Error ---------- */}
-         {error && (
-            <p style={{ color: "red", marginBottom: "1rem" }}>{error}</p>
-         )}
+         {error && <p className={styles.error}>{error}</p>}
 
-         {/* ---------- Upload Modal ---------- */}
-         <button onClick={() => setShowModal(true)} style={btnStyle}>
-            Upload Images
+         <button onClick={() => setShowModal(true)} className={styles.uploadButton}>
+            Վերբեռնել պատկերներ
          </button>
 
          {showModal && (
-            <div style={modalOverlay}>
-               <div style={modalBox}>
-                  <h2 style={{ marginTop: 0 }}>Upload Images</h2>
+            <div className={styles.modalOverlay}>
+               <div className={styles.modalBox}>
+                  <h2 className={styles.modalTitle}>Վերբեռնել պատկերներ</h2>
 
                   <select
                      value={selectedCategory}
                      onChange={(e) => setSelectedCategory(e.target.value)}
-                     style={inputStyle}
+                     className={styles.select}
                   >
-                     <option value="">— Select category —</option>
+                     <option value="">— Ընտրեք կատեգորիա —</option>
                      {categories.map((c) => (
                         <option key={c} value={c}>
                            {c}
@@ -179,85 +221,69 @@ export default function AdminPage() {
                      ))}
                   </select>
 
-                  {/* File input with a changing key → resets when modal closes */}
-                  <input
-                     key={showModal ? "open" : "closed"}
-                     type="file"
-                     multiple
-                     accept="image/*"
-                     onChange={(e) => setFiles(e.target.files)}
-                     style={{ ...inputStyle, marginTop: "0.5rem" }}
-                  />
+                  <div>
+                     <label className={styles.fileLabel}>
+                        Ներբեռնել պատկերներ
+                        <input
+                           type="file"
+                           multiple
+                           accept="image/*"
+                           onChange={(e) => setFiles(e.target.files)}
+                           className={styles.fileInput}
+                        />
+                     </label>
 
-                  <div style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}>
+                     <div className={styles.fileList}>
+                        {files && files.length > 0
+                           ? Array.from(files).map((file) => file.name).join(", ")
+                           : "Ֆայլը ընտրված չէ"}
+                     </div>
+                  </div>
+
+                  <div className={styles.modalActions}>
                      <button
                         onClick={handleUpload}
                         disabled={isUploading}
-                        style={btnStyle}
+                        className={styles.uploadButton}
                      >
-                        {isUploading ? "Uploading…" : "Upload"}
+                        {isUploading ? "Բեռնվում է…" : "Վերբեռնել"}
                      </button>
                      <button
                         onClick={() => {
                            setShowModal(false);
                            setError(null);
                         }}
-                        style={{ ...btnStyle, background: "#aaa" }}
+                        className={styles.uploadButton + " " + styles.cancelButton}
                      >
-                        Cancel
+                        Չեղարկել
                      </button>
                   </div>
                </div>
             </div>
          )}
 
-         {/* ---------- Gallery ---------- */}
-         <section style={{ marginTop: "2rem" }}>
+         <section className={styles.imagesSection}>
             {Object.entries(images).length === 0 ? (
-               <p>No images yet.</p>
+               <p className={styles.emptyMessage}>Դեռևս պատկերներ չկան։</p>
             ) : (
                Object.entries(images).map(([cat, imgs]) => (
-                  <div key={cat} style={{ marginBottom: "2.5rem" }}>
-                     <h2 style={{ textTransform: "capitalize" }}>{cat}</h2>
-                     <div
-                        style={{
-                           display: "grid",
-                           gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
-                           gap: "1rem",
-                        }}
-                     >
+                  <div key={cat}>
+                     <h2 className={styles.categoryTitle}>{cat}</h2>
+                     <div className={styles.imageGrid}>
                         {imgs.map((img) => (
-                           <div
-                              key={img.filename}
-                              style={{
-                                 position: "relative",
-                                 textAlign: "center",
-                              }}
-                           >
+                           <div key={img.filename} className={styles.imageItem}>
                               <Image
                                  src={img.url}
                                  alt={img.filename}
                                  width={150}
                                  height={150}
-                                 style={{
-                                    objectFit: "cover",
-                                    borderRadius: "4px",
-                                 }}
+                                 className={styles.image}
                               />
                               <button
                                  onClick={() => handleDelete(cat, img.filename)}
-                                 style={{
-                                    marginTop: "0.5rem",
-                                    fontSize: "0.8rem",
-                                    padding: "0.2rem 0.5rem",
-                                    background: "#e63946",
-                                    color: "#fff",
-                                    border: "none",
-                                    borderRadius: "4px",
-                                    cursor: "pointer",
-                                 }}
+                                 className={styles.deleteButton}
                               >
-                                 Delete
+                                 Ջնջել
                               </button>
                            </div>
                         ))}
@@ -269,40 +295,3 @@ export default function AdminPage() {
       </div>
    );
 }
-
-/* ------------------------------------------------------------------ */
-/* Simple inline styles – replace with Tailwind / CSS modules if you like */
-/* ------------------------------------------------------------------ */
-const btnStyle: React.CSSProperties = {
-   padding: "0.5rem 1rem",
-   background: "#0066cc",
-   color: "#fff",
-   border: "none",
-   borderRadius: "4px",
-   cursor: "pointer",
-};
-
-const inputStyle: React.CSSProperties = {
-   display: "block",
-   width: "100%",
-   padding: "0.5rem",
-   marginBottom: "0.5rem",
-};
-
-const modalOverlay: React.CSSProperties = {
-   position: "fixed",
-   inset: 0,
-   background: "rgba(0,0,0,0.6)",
-   display: "flex",
-   alignItems: "center",
-   justifyContent: "center",
-   zIndex: 9999,
-};
-
-const modalBox: React.CSSProperties = {
-   background: "#fff",
-   padding: "2rem",
-   borderRadius: "8px",
-   minWidth: "320px",
-   maxWidth: "90vw",
-};

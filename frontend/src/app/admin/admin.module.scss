@@ -1,0 +1,157 @@
+.container {
+   padding: 32px;
+   font-family: system-ui, sans-serif;
+}
+
+.title {
+   margin-bottom: 24px;
+   font-size: 28px;
+}
+
+.addCategorySection {
+   margin-bottom: 24px;
+   display: flex;
+   gap: 8px;
+}
+
+.categoryInput {
+   padding: 8px;
+   flex: 1;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+}
+
+.error {
+   color: red;
+   margin-bottom: 16px;
+   font-size: 14px;
+}
+
+.uploadButton {
+   padding: 8px 16px;
+   background: #0066cc;
+   color: #fff;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   font-size: 16px;
+
+   &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+   }
+}
+
+.modalOverlay {
+   position: fixed;
+   inset: 0;
+   background: rgba(0, 0, 0, 0.6);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 9999;
+}
+
+.modalBox {
+   background: #fff;
+   padding: 32px;
+   border-radius: 8px;
+   min-width: 320px;
+   max-width: 90%;
+   width: 100%;
+}
+
+.modalTitle {
+   margin: 0 0 16px 0;
+   font-size: 20px;
+}
+
+.select {
+   display: block;
+   width: 100%;
+   padding: 8px;
+   margin-bottom: 8px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+}
+
+.fileLabel {
+   display: inline-block;
+   padding: 8px 16px;
+   background-color: #007bff;
+   color: #fff;
+   cursor: pointer;
+   border-radius: 4px;
+   margin-bottom: 8px;
+   font-size: 16px;
+}
+
+.fileInput {
+   display: none;
+}
+
+.fileList {
+   margin-top: 8px;
+   font-size: 14px;
+   color: #555;
+}
+
+.modalActions {
+   margin-top: 16px;
+   display: flex;
+   gap: 8px;
+}
+
+.cancelButton {
+   background: #aaa;
+}
+
+.imagesSection {
+   margin-top: 32px;
+}
+
+.categoryTitle {
+   text-transform: capitalize;
+   font-size: 22px;
+   margin-bottom: 16px;
+}
+
+.imageGrid {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 16px;
+   justify-content: flex-start;
+}
+
+.imageItem {
+   flex: 0 0 150px;
+   width: 150px;
+   position: relative;
+   text-align: center;
+}
+
+.image {
+   width: 150px;
+   height: 150px;
+   object-fit: cover;
+   border-radius: 4px;
+}
+
+.deleteButton {
+   margin-top: 8px;
+   font-size: 12px;
+   padding: 4px 8px;
+   background: #e63946;
+   color: #fff;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+   width: 100%;
+}
+
+.emptyMessage {
+   color: #666;
+   font-size: 16px;
+}

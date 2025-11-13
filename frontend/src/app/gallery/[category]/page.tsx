@@ -3,31 +3,48 @@ import GalleryContent from "@/components/GalleryContent";
 import Footer from "@/components/Footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import Frame from "@/components/Frame";
+import styles from "./category.module.scss";
+
+type ImageItem = { url: string; filename: string };
 
 interface Props {
-   params: { category: string };
+   params: Promise<{ category: string }>;
 }
 
 export default async function CategoryPage({ params }: Props) {
-   const category = params?.category;
+   const { category } = await params;
+   const decoded = decodeURIComponent(category);
 
-   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-   const res = await fetch(`${BACKEND_URL}/admin/get-images-by`, { cache: "no-store" });
+   const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
 
-   if (!res.ok) {
-      const errorText = await res.text();
-      console.error("API response error:", errorText);
-      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+   let items: ImageItem[] = [];
+
+   try {
+      const res = await fetch(`${BACKEND_URL}/admin/get-images-by`, {
+         cache: "no-store",
+      });
+      if (!res.ok) throw new Error("Failed");
+      const data = await res.json();
+      items = (data.imagesBy?.[decoded] as ImageItem[] | undefined) ?? [];
+   } catch (err) {
+      console.error("Fetch error:", err);
    }
-
-   const data = await res.json();
-   const items = data.imagesBy[category] || [];
 
    return (
       <>
          <Frame />
          <GalleryHeader />
-         <GalleryContent items={items} />
+
+         {items.length === 0 ? (
+            <main className={styles.emptyState}>
+               <p className={styles.emptyMessage}>
+                  <strong>{decoded}ներում պատկերներ չկան</strong>
+               </p>
+            </main>
+         ) : (
+            <GalleryContent items={items} />
+         )}
+
          <Footer />
          <BackToTopButton />
       </>
