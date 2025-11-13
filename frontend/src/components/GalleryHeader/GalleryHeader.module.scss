@@ -1,57 +1,227 @@
-
-
-.galleryHeader{
+.galleryHeader {
    width: 100%;
-
    display: flex;
    flex-direction: column;
-   justify-content: center;
-   align-content: space-between;
-
+   position: relative;
+   background-color: #fff;
 }
 
-.headerTop{
+.headerTop {
    max-width: 1245px;
    width: 100%;
    height: 110px;
-
    margin: 0 auto;
-
+   padding: 0 25px;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   box-sizing: border-box;
 }
 
-.logo,
-.logo img {
+.rightGroup {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+}
+
+.logo {
    width: 256px;
    height: 46px;
+
+   .logoImage {
+      width: 100%;
+      height: auto;
+   }
 }
 
 .smLinks {
    display: flex;
-   gap: 10px;
-}
-
-.smLinks a {
-   width: 32px;
-   height: 18px;
-
-   display: flex;
-   justify-content: end;
+   gap: 16px;
    align-items: center;
 }
 
-.smLinks a img {
-   height: 15px;
+.smIcon {
+   width: 24px;
+   height: 24px;
+   object-fit: contain;
+}
+
+.burgerButton {
+   display: none;
+   flex-direction: column;
+   justify-content: center;
+   gap: 5px;
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 8px;
+   z-index: 1001;
+
+   .burgerLine {
+      width: 24px;
+      height: 3px;
+      background-color: #000;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+   }
+
+   &[aria-expanded="true"] {
+      .burgerLine {
+         &:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+         }
+
+         &:nth-child(2) {
+            opacity: 0;
+         }
+
+         &:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+         }
+      }
+   }
 }
 
 .navBar {
    display: flex;
-   justify-content: space-evenly;
+   justify-content: center;
    align-items: center;
    flex-wrap: wrap;
+   gap: 24px;
+   padding: 12px 20px;
+   background-color: #cccccc;
    font-size: 15px;
-   padding: 10px 0px;
-   background-color: #ccc;
+   transition: all 0.3s ease;
+}
+
+.navLink {
+   color: #000;
+   text-decoration: none;
+   padding: 8px 12px;
+   border-radius: 4px;
+   transition: background-color 0.2s;
+   white-space: nowrap;
+
+   &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+   }
+}
+
+.mobileSmLinks,
+.mobileOverlay {
+   display: none;
+}
+
+/* Mobile: ≤512px */
+@media (max-width: 512px) {
+   .headerTop {
+      padding: 0 15px;
+      height: 90px;
+   }
+
+   .logo {
+      width: 140px;
+      height: auto;
+   }
+
+   /* Hide desktop social links */
+   .smLinks {
+      display: none;
+   }
+
+   /* Show burger */
+   .burgerButton {
+      display: flex;
+   }
+
+   /* Mobile menu */
+   .navBar {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 100px 24px 40px;
+      background-color: #f5f5f5;
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+      overflow-y: auto;
+      z-index: 1000;
+      gap: 12px;
+      transition: right 0.3s ease;
+   }
+
+   .navBarOpen {
+      right: 0;
+   }
+
+   .navLink {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 8px;
+      font-size: 16px;
+   }
+
+   .mobileSmLinks {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #ddd;
+      width: 100%;
+      justify-content: center;
+   }
+
+   .mobileOverlay {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 999;
+   }
+}
+
+@media (min-width: 513px) {
+
+   .burgerButton,
+   .mobileOverlay,
+   .mobileSmLinks {
+      display: none;
+   }
+
+   .navBar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 12px 20px;
+      background-color: #cccccc;
+      font-size: 15px;
+   }
+}
+
+/* Optional: Tablet tweaks */
+@media (min-width: 513px) and (max-width: 768px) {
+   .headerTop {
+      padding: 0 20px;
+   }
+
+   .logo {
+      width: 180px;
+   }
+
+   .smLinks {
+      gap: 12px;
+   }
+
+   .smIcon {
+      width: 20px;
+      height: 20px;
+   }
 }

@@ -1,34 +1,46 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import styles from "./GalleryContent.module.scss";
 
-type ImageItem = {
-   category: string;
-   filename: string;
-   url: string;
-};
+export type ImageItem = { url: string; filename: string };
 
-interface GalleryContentProps {
+interface Props {
    items: ImageItem[];
 }
 
-export default function GalleryContent({ items }: GalleryContentProps) {
-   if (!items || !items.length) return <p>No images found.</p>;
+export default function GalleryContent({ items }: Props) {
+   const pathname = usePathname();
+
+   const getPageTitle = () => {
+      if (pathname === "/") return "Գլխավոր";
+      if (pathname.startsWith("/gallery/")) {
+         const slug = pathname.split("/gallery/")[1];
+         return decodeURIComponent(slug);
+      }
+      return "Գլխավոր";
+   };
+
+   const title = getPageTitle();
 
    return (
-      <div className={styles.galleryGrid}>
-         {items.map(item => (
-            <div key={item.filename} className={styles.galleryItem}>
-               <Image
-                  src={item.url}
-                  alt={item.filename}
-                  width={300}
-                  height={300}
-                  style={{ objectFit: "cover" }}
-               />
-            </div>
-         ))}
-      </div>
+      <main className={styles.container}>
+         <h2 className={styles.title}>{title}</h2>
+         <div className={styles.grid}>
+            {items.map((img) => (
+               <div key={img.filename} className={styles.item}>
+                  <Image
+                     src={img.url}
+                     alt={img.filename}
+                     fill
+                     sizes="(max-width: 768px) 100vw, 33vw"
+                     className={styles.image}
+                     priority={false}
+                  />
+               </div>
+            ))}
+         </div>
+      </main>
    );
 }
