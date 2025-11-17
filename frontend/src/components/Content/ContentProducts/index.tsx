@@ -1,3 +1,6 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import styles from "./ContentProducts.module.scss";
 
 const productItems = [
@@ -16,6 +19,13 @@ const productItems = [
 ];
 
 export default function ContentProducts() {
+   const router = useRouter();
+
+   function formatName(str: string) {
+      const lower = str.toLowerCase();
+      return lower.charAt(0).toUpperCase() + lower.slice(1);
+   }
+
    return (
       <div id="clients" className={styles.productsContainer}>
          <div className={styles.productsInfo}>
@@ -26,16 +36,24 @@ export default function ContentProducts() {
                յուրաքանչյուրն ունի իր հատուկ բնութագրերը և կիրառման ոլորտը:
             </p>
          </div>
+
          <ul className={styles.productsTable}>
-            {productItems.map((item, index) => (
-               <li
-                  key={index}
-                  className={styles.productItem}
-                  style={{ ["--bg" as string]: `url(${item.image})` }}
-               >
-                  <span>{item.name}</span>
-               </li>
-            ))}
+            {productItems.map((item, index) => {
+               const formatted = formatName(item.name);
+
+               return (
+                  <li
+                     key={index}
+                     className={styles.productItem}
+                     style={{ ["--bg" as string]: `url(${item.image})` }}
+                     onClick={() =>
+                        router.push(`/gallery/${encodeURIComponent(formatted)}`)
+                     }
+                  >
+                     <span>{item.name}</span>
+                  </li>
+               );
+            })}
          </ul>
       </div>
    );
