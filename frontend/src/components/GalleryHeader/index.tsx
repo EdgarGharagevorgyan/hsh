@@ -33,14 +33,17 @@ export default function GalleryHeader() {
       <header className={styles.galleryHeader}>
          <div className={styles.headerTop}>
             <div className={styles.logo}>
-               <Image
-                  src="/hsh-logo.svg"
-                  alt="HSH Logo"
-                  width={256}
-                  height={46}
-                  priority
-                  className={styles.logoImage}
-               />
+               <Link href="/" onClick={closeMenu}>
+                  <Image
+                     src="/hsh-logo.svg"
+                     alt="HSH Logo"
+                     width={256}
+                     height={46}
+                     priority
+                     className={styles.logoImage}
+                  />
+               </Link>
+
             </div>
 
             <div className={styles.rightGroup}>
@@ -89,9 +92,6 @@ export default function GalleryHeader() {
          </div>
 
          <nav className={`${styles.navBar} ${isMenuOpen ? styles.navBarOpen : ""}`}>
-            <Link href="/" className={styles.navLink} onClick={closeMenu}>
-               Գլխավոր
-            </Link>
 
             {categories.map((cat) => (
                <Link

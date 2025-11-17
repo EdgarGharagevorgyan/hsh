@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.scss";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "HSH Furniture",
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );
