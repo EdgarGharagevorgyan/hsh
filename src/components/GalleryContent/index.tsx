@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import styles from "./GalleryContent.module.scss";
+import { categorySchema } from "@/src/shared/schemas/category.schema";
 
 export type ImageItem = { url: string; filename: string };
 
@@ -15,10 +16,12 @@ export default function GalleryContent({ items }: Props) {
 
    const getPageTitle = () => {
       if (!pathname) return "Գլխավոր";
+
       if (pathname.startsWith("/gallery/")) {
-         const slug = pathname.split("/gallery/")[1];
-         return decodeURIComponent(slug);
+         const slug = decodeURIComponent(pathname.split("/gallery/")[1]);
+         return categorySchema[slug]?.name || slug;
       }
+
       return "Գլխավոր";
    };
 

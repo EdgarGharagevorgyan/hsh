@@ -4,15 +4,22 @@ import Footer from "@/components/Footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import Frame from "@/components/Frame";
 import styles from "../gallery.module.scss";
+import { categorySchema } from "@/shared/schemas/category.schema";
 
 type ImageItem = { url: string; filename: string };
 
 export const dynamic = "force-dynamic";
 export const revalidate = false;
-export async function generateStaticParams() { return []; }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
+export async function generateStaticParams() {
+    return Object.keys(categorySchema).map((key) => ({ category: key }));
+}
+
+export default async function CategoryPage({ params: awaitedParams }: { params: Promise<{ category: string }> }) {
+    const params = await awaitedParams;
     const decoded = decodeURIComponent(params.category);
+
+    const categoryName = categorySchema[params.category]?.name || decoded;
 
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -34,7 +41,7 @@ export default async function CategoryPage({ params }: { params: { category: str
             {isEmpty ? (
                 <main className={styles.emptyState}>
                     <p className={styles.emptyMessage}>
-                        <strong>{decoded}ներում պատկերներ չկան</strong>
+                        <strong>{categoryName}ներում պատկերներ չկան</strong>
                     </p>
                 </main>
             ) : (

@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./GalleryHeader.module.scss";
+import { categorySchema } from "@/shared/schemas/category.schema";
 
 export default function GalleryHeader() {
    const [categories, setCategories] = useState<string[]>([]);
@@ -75,7 +76,7 @@ export default function GalleryHeader() {
                   className={styles.navLink}
                   onClick={closeMenu}
                >
-                  {cat}
+                  {categorySchema[cat]?.name}
                </Link>
             ))}
 

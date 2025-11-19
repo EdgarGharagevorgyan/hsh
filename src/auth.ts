@@ -5,17 +5,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
    providers: [
       Credentials({
          credentials: {
-            password: { label: "Password", type: "password" },
+            password: { label: "Գաղտնաբառ", type: "password" },
          },
          async authorize(credentials) {
             if (credentials?.password === process.env.ADMIN_PASSWORD) {
-               return { id: "1", name: "Admin" };
+               return { id: "1", name: "Admin", email: "admin@hsh.am" };
             }
             return null;
          },
       }),
    ],
-   pages: { signIn: "/admin" },
+   pages: {
+      signIn: "/admin/login",
+   },
    session: { strategy: "jwt" },
    secret: process.env.NEXTAUTH_SECRET,
 });

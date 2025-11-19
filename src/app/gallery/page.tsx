@@ -8,6 +8,7 @@ import Loading from "@/components/Loading";
 import Footer from "@/components/Footer";
 import BackToTopButton from "@/components/BackToTopButton";
 import GalleryHeader from "@/components/GalleryHeader";
+import { categorySchema } from "@/shared/schemas/category.schema";
 
 export default function Gallery() {
    const [isLoading, setIsLoading] = useState(true);
@@ -17,15 +18,15 @@ export default function Gallery() {
    useEffect(() => {
       const loadAndRedirect = async () => {
          try {
-            const res = await fetch("/api/admin/categories", { cache: "no-store" });
-            const data = await res.json();
-            const categories: string[] = data.categories ?? [];
+            // const res = await fetch("/api/admin/categories", { cache: "no-store" });
+            // const data = await res.json();
+            const categoryKeys: string[] = Object.values(categorySchema).map(item => item.name);
 
-            if (categories.length > 0) {
-               const sorted = categories.sort((a, b) => a.localeCompare(b, "hy"));
-               const firstCategory = sorted[0];
+            if (categoryKeys.length > 0) {
+               const sortedKeys = categoryKeys.sort((a, b) => categorySchema[a].name.localeCompare(categorySchema[b].name, "hy"));
+               const firstCategoryKey = sortedKeys[0];
                setHasRedirected(true);
-               router.replace(`/gallery/${encodeURIComponent(firstCategory)}`);
+               router.replace(`/gallery/${encodeURIComponent(categorySchema[firstCategoryKey].slug)}`);
                return;
             }
          } catch (err) {
