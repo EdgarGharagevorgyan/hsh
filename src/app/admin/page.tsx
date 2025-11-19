@@ -45,11 +45,13 @@ export default function AdminDashboardPage() {
    }, [isAuthenticated, fetchData]);
 
    useEffect(() => {
-      if (!isAuthenticated) {
-         router.push("/admin/login")
+      console.log({status})
+      if (!isAuthenticated && status !== "loading") {
+         router.push("/admin/login");
+         return;
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [isAuthenticated]);
+   }, [isAuthenticated, status]);
 
    const handleLogout = () => signOut({ callbackUrl: "/admin/login" });
 
