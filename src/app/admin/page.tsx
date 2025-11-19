@@ -169,7 +169,7 @@ export default function AdminDashboardPage() {
                   <h2 className={styles.modalTitle}>Վերբեռնել պատկերներ</h2>
                   <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className={styles.select}>
                      <option value="">— Ընտրեք կատեգորիա —</option>
-                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                     {categories.map(c => <option key={c} value={c}>{categorySchema[c]?.name}</option>)}
                   </select>
                   <label className={styles.fileLabel}>
                      Ընտրել պատկերներ
