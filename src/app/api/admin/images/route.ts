@@ -37,7 +37,7 @@ export async function GET(request: Request) {
    });
 
    if (category) {
-      const images = imagesBy[category] || [];
+      const images = imagesBy[decodeURIComponent(category)] || [];
       return NextResponse.json({ images });
    }
 
