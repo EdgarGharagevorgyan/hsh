@@ -11,39 +11,38 @@ export const dynamic = "force-dynamic";
 export const revalidate = false;
 export async function generateStaticParams() { return []; }
 
-export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
-   const { category } = await params;
-   const decoded = decodeURIComponent(category);
+export default async function CategoryPage({ params }: { params: { category: string } }) {
+    const decoded = decodeURIComponent(params.category);
 
-   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-   const res = await fetch(`${baseUrl}/api/admin/images?category=${encodeURIComponent(decoded)}`, {
-      cache: "no-store"
-   });
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-   const data = res.ok ? await res.json() : { images: [] };
-   const rawItems: ImageItem[] = data.images || [];
+    const res = await fetch(`${baseUrl}/api/admin/images?category=${encodeURIComponent(decoded)}`, {
+        cache: "no-store"
+    });
 
-   const items = rawItems.filter(img => img.filename !== ".keep");
+    const data = res.ok ? await res.json() : { images: [] };
+    const rawItems: ImageItem[] = data.images || [];
 
-   const isEmpty = items.length === 0;
+    const items = rawItems.filter(img => img.filename !== ".keep");
+    const isEmpty = items.length === 0;
 
-   return (
-      <>
-         <Frame />
-         <GalleryHeader />
+    return (
+        <>
+            <Frame />
+            <GalleryHeader />
 
-         {isEmpty ? (
-            <main className={styles.emptyState}>
-               <p className={styles.emptyMessage}>
-                  <strong>{decoded}ներում պատկերներ չկան</strong>
-               </p>
-            </main>
-         ) : (
-            <GalleryContent items={items} />
-         )}
+            {isEmpty ? (
+                <main className={styles.emptyState}>
+                    <p className={styles.emptyMessage}>
+                        <strong>{decoded}ներում պատկերներ չկան</strong>
+                    </p>
+                </main>
+            ) : (
+                <GalleryContent items={items} />
+            )}
 
-         <Footer />
-         <BackToTopButton />
-      </>
-   );
+            <Footer />
+            <BackToTopButton />
+        </>
+    );
 }
