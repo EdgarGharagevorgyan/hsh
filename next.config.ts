@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         pathname: "/**",        
       },
       {
+        protocol: "https",
+        hostname: "**.r2.cloudflarestorage.com",
+        pathname: "/**",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "5000",
