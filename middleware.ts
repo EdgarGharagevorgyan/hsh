@@ -4,10 +4,17 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
    const session = await auth();
+   const { pathname } = request.nextUrl;
 
-   if (request.nextUrl.pathname.startsWith("/admin") && !session) {
-      const loginUrl = new URL("/admin", request.url);
-      loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+   // Allow login page
+   if (pathname.startsWith("/admin/login")) {
+      return NextResponse.next();
+   }
+
+   // Redirect unauthorized users
+   if (pathname.startsWith("/admin") && !session) {
+      const loginUrl = new URL("/admin/login", request.url);
+      loginUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(loginUrl);
    }
 
@@ -15,5 +22,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-   matcher: "/admin/:path*",
+   matcher: ["/admin/:path*"],
 };
