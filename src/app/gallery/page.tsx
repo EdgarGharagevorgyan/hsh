@@ -20,7 +20,7 @@ export default function Gallery() {
          try {
             // const res = await fetch("/api/admin/categories", { cache: "no-store" });
             // const data = await res.json();
-            const categoryKeys: string[] = Object.values(categorySchema).map(item => item.name);
+            const categoryKeys: string[] = Object.keys(categorySchema);
 
             if (categoryKeys.length > 0) {
                const sortedKeys = categoryKeys.sort((a, b) => categorySchema[a].name.localeCompare(categorySchema[b].name, "hy"));

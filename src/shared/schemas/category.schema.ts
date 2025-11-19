@@ -9,51 +9,51 @@ export interface CategorySchema {
 
 export const categorySchema: CategorySchema = {
    chairs: {
-      slug: 'Chair',
+      slug: 'chairs',
       name: 'Աթոռներ',
    },
    customorders: {
-      slug: 'Custom orders',
+      slug: 'customorders',
       name: 'Անհատական պատվերներ',
    },
    office: {
-      slug: 'Office furniture',
+      slug: 'office',
       name: 'Գրասենյակի կահույք',
    },
    bathroom: {
-      slug: 'Bathroom furniture',
+      slug: 'bathroom',
       name: 'Լոգարանի կահույք',
    },
    kitchen: {
-      slug: 'Kitchen furniture',
+      slug: 'kitchen',
       name: 'Խոհանոցային կահույք',
    },
    tvstand: {
-      slug: 'TV-stand',
+      slug: 'tvstand',
       name: 'Հեռուստացույցի տակդիր',
    },
    hotel: {
-      slug: 'Hotel furniture',
+      slug: 'hotel',
       name: 'Հյուրանոցային կահույք',
    },
    bed: {
-      slug: 'Bed',
+      slug: 'bed',
       name: 'Մահճակալ',
    },
    wardrobe: {
-      slug: 'Wardrobe',
+      slug: 'wardrobe',
       name: 'Պահարան',
    },
    table: {
-      slug: 'Table',
+      slug: 'table',
       name: 'Սեղան',
    },
    wooden: {
-      slug: 'Wooden accessories',
+      slug: 'wooden',
       name: 'Փայտյա աքսեսուարներ',
    },
    cradle: {
-      slug: 'Cradle',
+      slug: 'cradle',
       name: 'Օրորոց',
    },
 };
