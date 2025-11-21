@@ -19,7 +19,11 @@ export default function GalleryContent({ items }: Props) {
       if (!pathname?.startsWith("/gallery/")) return "Գալերիա";
 
       const slug = decodeURIComponent(pathname.split("/gallery/")[1]);
-      return categorySchema[slug]?.name || slug;
+      const category = Object.values(categorySchema)
+         .find(c => c.slug === slug);
+
+      return category?.name || slug;
+
    };
 
    const title = getPageTitle();

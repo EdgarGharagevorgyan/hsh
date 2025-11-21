@@ -8,6 +8,7 @@ export const metadata = {
       title: "HSH Furniture – Ձեռագործ Փայտե Կահույք",
       images: "/gallery-images/gallery-image-1.jpg",
    },
+   alternates: { canonical: "/" }
 };
 
 export default function HomePage() {

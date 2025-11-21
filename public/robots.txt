@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://hshfurniture.com
+Host: https://hshfurnitures.com
 
 # Sitemaps
-Sitemap: https://hshfurniture.com/sitemap.xml
+Sitemap: https://hshfurnitures.com/sitemap.xml

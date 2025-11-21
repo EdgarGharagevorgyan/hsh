@@ -2,7 +2,7 @@
 
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-   siteUrl: "https://hshfurniture.com",
+   siteUrl: "https://hshfurnitures.com",
    generateRobotsTxt: true,
    robotsTxtOptions: {
       policies: [{ userAgent: "*", allow: "/" }],

@@ -3,7 +3,7 @@ import "./globals.scss";
 import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://hshfurnitures.com"), 
+  metadataBase: new URL("https://hshfurnitures.com"),
   title: {
     default: "HSH Furniture | Ձեռագործ Փայտե Կահույք Հայաստանում",
     template: "%s | HSH Furniture",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "HSH Furniture | Ձեռագործ Փայտե Կահույք",
     description: "Բարձրորակ ձեռագործ կահույք՝ պատրաստված սիրով և փորձով",
-    url: "https://hsh.am",
+    url: "https://hshfurnitures.com",
     siteName: "HSH Furniture",
     images: [
       {
@@ -54,8 +54,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "HSH Furniture",
-  url: "https://hsh.am",
-  logo: "https://hsh.am/hsh-logo.svg",
+  url: "https://hshfurnitures.com",
+  logo: "https://hshfurnitures.com/hsh-logo.svg",
   description: "Ձեռագործ փայտե կահույքի արտադրություն և վաճառք Հայաստանում",
   address: {
     "@type": "PostalAddress",
