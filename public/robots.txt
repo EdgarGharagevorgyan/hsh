@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://hshfurnitures.com
+
+# Sitemaps
+Sitemap: https://hshfurnitures.com/sitemap.xml

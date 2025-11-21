@@ -1,30 +1,18 @@
+// src/components/GalleryHeader/GalleryHeaderClient.tsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./GalleryHeader.module.scss";
 import { categorySchema } from "@/shared/schemas/category.schema";
 
-export default function GalleryHeader() {
-   const [categories, setCategories] = useState<string[]>([]);
+interface Props {
+   initialCategories: string[];
+}
+
+export default function GalleryHeaderClient({ initialCategories }: Props) {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-   useEffect(() => {
-      const fetchCategories = async () => {
-         try {
-            const res = await fetch("/api/admin/categories", { cache: "no-store" });
-            const data = await res.json();
-            setCategories(data.categories || []);
-         } catch (err) {
-            console.error("Failed to load categories:", err);
-         }
-      };
-
-      fetchCategories();
-      const id = setInterval(fetchCategories, 30_000);
-      return () => clearInterval(id);
-   }, []);
 
    const toggleMenu = () => setIsMenuOpen(prev => !prev);
    const closeMenu = () => setIsMenuOpen(false);
@@ -36,7 +24,7 @@ export default function GalleryHeader() {
                <Link href="/" onClick={closeMenu}>
                   <Image
                      src="/hsh-logo.svg"
-                     alt="HSH Logo"
+                     alt="HSH Furniture – Ձեռագործ փայտե կահույք"
                      width={256}
                      height={46}
                      priority
@@ -47,10 +35,10 @@ export default function GalleryHeader() {
 
             <div className={styles.rightGroup}>
                <div className={styles.smLinks}>
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                      <Image src="/icons/facebook-f-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <a href="https://instagram.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                      <Image src="/icons/instagram-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                   </a>
                </div>
@@ -58,7 +46,7 @@ export default function GalleryHeader() {
                <button
                   className={styles.burgerButton}
                   onClick={toggleMenu}
-                  aria-label="Toggle navigation menu"
+                  aria-label="Բացել մենյուն"
                   aria-expanded={isMenuOpen}
                >
                   <span className={styles.burgerLine}></span>
@@ -69,28 +57,28 @@ export default function GalleryHeader() {
          </div>
 
          <nav className={`${styles.navBar} ${isMenuOpen ? styles.navBarOpen : ""}`}>
-            {categories.map(cat => (
+            {initialCategories.map(slug => (
                <Link
-                  key={cat}
-                  href={`/gallery/${encodeURIComponent(cat)}`}
+                  key={slug}
+                  href={`/gallery/${encodeURIComponent(slug)}`}
                   className={styles.navLink}
                   onClick={closeMenu}
                >
-                  {categorySchema[cat]?.name}
+                  {categorySchema[slug]?.name ?? slug}
                </Link>
             ))}
 
             <div className={styles.mobileSmLinks}>
-               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+               <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <Image src="/icons/facebook-f-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                </a>
-               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+               <a href="https://instagram.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <Image src="/icons/instagram-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                </a>
             </div>
          </nav>
 
-         {isMenuOpen && <div className={styles.mobileOverlay} onClick={closeMenu}></div>}
+         {isMenuOpen && <div className={styles.mobileOverlay} onClick={closeMenu} aria-hidden="true" />}
       </header>
    );
 }
