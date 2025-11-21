@@ -1,48 +1,15 @@
-"use client";
-import { useEffect, useState } from "react";
-import styles from "./page.module.scss";
-import Header from "@/components/MainHeader";
-import MobileHeader from "@/components/MainHeader/MobileHeader"; 
-import Frame from "@/components/Frame";
-import Loading from "@/components/Loading";
-import Content from "@/components/Content";
-import Footer from "@/components/Footer";
-import BackToTopButton from "@/components/BackToTopButton";
+import HomeClient from "@/src/components/HomeClient"; 
 
-export default function Home() {
-   const [isLoading, setIsLoading] = useState(true);
-   const [isDesktop, setIsDesktop] = useState(true); 
+export const metadata = {
+   title: "Գլխավոր | HSH Furniture – Ձեռագործ Փայտե Կահույք Հայաստանում",
+   description:
+      "20+ տարվա փորձով ձեռագործ փայտե կահույք՝ մահճակալներ, պահարաններ, խոհանոցներ, գրասենյակային կահույք։ Անվճար չափագրում և առաքում Երևանում։",
+   openGraph: {
+      title: "HSH Furniture – Ձեռագործ Փայտե Կահույք",
+      images: "/gallery-images/gallery-image-1.jpg",
+   },
+};
 
-   useEffect(() => { 
-      const handleResize = () => {
-         setIsDesktop(window.innerWidth > 1060);
-      };
-
-      handleResize();
-
-      window.addEventListener("resize", handleResize);
-
-      return () => window.removeEventListener("resize", handleResize);
-   }, []);
-
-   useEffect(() => {
-      const timeout = setTimeout(() => setIsLoading(false), 1500);
-      return () => clearTimeout(timeout);
-   }, []);
-
-   return (
-      <>
-         <Loading visible={isLoading} />
-         <div
-            className={styles.container}
-            style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.5s ease" }}
-         >
-            <Frame />
-            {isDesktop ? <Header /> : <MobileHeader />}
-            <Content />
-            <Footer />
-            <BackToTopButton />
-         </div>
-      </>
-   );
+export default function HomePage() {
+   return <HomeClient />; 
 }
