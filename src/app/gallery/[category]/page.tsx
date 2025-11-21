@@ -1,4 +1,5 @@
 // src/app/gallery/[category]/page.tsx
+
 import { notFound } from "next/navigation";
 import GalleryHeader from "@/src/components/GalleryHeader/ServerGalleryHeader";
 import GalleryContent from "@/components/GalleryContent";
@@ -40,7 +41,7 @@ export async function generateMetadata({
         openGraph: {
             title,
             description,
-            url: `https://hsh.am/gallery/${cat.slug}`,
+            url: `https://hshfurnitures.com/gallery/${cat.slug}`,
             images: ["/gallery-images/gallery-image-1.jpg"],
             type: "website",
         },
@@ -75,7 +76,7 @@ export default async function CategoryPage({
         "@type": "CollectionPage",
         name: `${cat.name} | HSH Furniture`,
         description: `Ձեռագործ ${cat.name.toLowerCase()}ներ Հայաստանում`,
-        url: `https://hsh.am/gallery/${cat.slug}`,
+        url: `https://hshfurnitures.com/gallery/${cat.slug}`,
         image: items[0]?.url || "/gallery-images/gallery-image-1.jpg",
     };
 

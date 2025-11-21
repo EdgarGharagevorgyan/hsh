@@ -1,3 +1,5 @@
+// src/shared/schemas/category.schema.ts
+
 export interface Category {
    slug: string;
    name: string;

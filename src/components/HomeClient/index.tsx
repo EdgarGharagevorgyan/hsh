@@ -1,7 +1,9 @@
+// src/components/HomeClient/index.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "@/components/HomeClient.module.scss";
+import styles from "@/components/HomeClient/HomeClient.module.scss";
 import Header from "@/components/MainHeader";
 import MobileHeader from "@/components/MainHeader/MobileHeader";
 import Frame from "@/components/Frame";

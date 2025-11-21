@@ -1,3 +1,5 @@
+// src/app/gallery/page.tsx
+
 import { redirect } from "next/navigation";
 import { categorySchema } from "@/shared/schemas/category.schema";
 
