@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 import styles from "./GalleryContent.module.scss";
 import { categorySchema } from "@/shared/schemas/category.schema";
 
-export type ImageItem = { url: string; filename: string };
+export type ImageItem = {
+   imgAlt?: string; url: string; filename: string;
+};
 
 interface Props {
    items: ImageItem[];
@@ -44,7 +46,7 @@ export default function GalleryContent({ items }: Props) {
                   <div key={img.filename} className={styles.item}>
                      <Image
                         src={img.url}
-                        alt={`HSH Furniture – Ձեռագործ ${title.toLowerCase()} ${cleanName}`}
+                        alt={`${img?.imgAlt || `HSH Furniture – Ձեռագործ ${title.toLowerCase()} ${cleanName}`}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className={styles.image}

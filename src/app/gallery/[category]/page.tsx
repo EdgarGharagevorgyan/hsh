@@ -75,7 +75,7 @@ export default async function CategoryPage({
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: `${cat.name} | HSH Furniture`,
-        description: `Ձեռագործ ${cat.name.toLowerCase()}ներ Հայաստանում`,
+        description: `Ձեռագործ ${cat.name.toLowerCase()} Հայաստանում`,
         url: `https://hshfurnitures.com/gallery/${cat.slug}`,
         image: items[0]?.url || "/gallery-images/gallery-image-1.jpg",
     };
@@ -91,7 +91,7 @@ export default async function CategoryPage({
             {items.length === 0 ? (
                 <main className={styles.emptyState}>
                     <p className={styles.emptyMessage}>
-                        <strong>{cat.name}ներում դեռևս նկարներ չկան</strong>
+                        <strong>{cat.name}ում դեռևս նկարներ չկան</strong>
                     </p>
                 </main>
             ) : (

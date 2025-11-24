@@ -1,3 +1,5 @@
+// src/app/layout.tsx
+
 import type { Metadata } from "next";
 import "./globals.scss";
 import { SessionProvider } from "next-auth/react";
@@ -9,17 +11,35 @@ export const metadata: Metadata = {
     template: "%s | HSH Furniture",
   },
   description:
-    "20+ տարվա փորձով ձեռագործ փայտե կահույք՝ մահճակալներ, պահարաններ, խոհանոցներ, գրասենյակային և հյուրանոցային կահույք։ Երևան, Հայաստան։",
-  keywords:
-    "փայտե կահույք, ձեռագործ կահույք, մահճակալ, պահարան, խոհանոցային կահույք, Երևան, Հայաստան, պատվերով կահույք",
+    "Ձեռագործ փայտե կահույք Երևանում և Հայաստանում. Մահճակալներ, պահարաններ, խոհանոցներ, հյուրասենյակ և գրասենյակային կահույք․ 20+ տարվա փորձ։ Handmade wooden furniture in Armenia.",
+  keywords: [
+    // Armenian
+    "փայտե կահույք", "հատուկ պատվերով կահույք", "մահճակալ", "պահարան", "խոհանոցային կահույք",
+    "կահույք Երևան", "ձեռագործ կահույք",
+
+    // Armenian transliteration
+    "payte kahuyq", "dzerragorc kahuyq", "mahcakal", "paharan", "khoxanoc kahuyq",
+    "kahuyq yerevan", "patverov kahuyq",
+
+    // Russian
+    "деревянная мебель", "мебель на заказ", "кровать деревянная", "шкаф деревянный",
+    "кухонная мебель", "мебель Ереван", "мебель Армения",
+
+    // English searches
+    "handmade wooden furniture Armenia",
+    "custom wood furniture Yerevan",
+    "wooden bed Armenia", "wood cabinet Armenia",
+
+    // Misspellings 
+    "payte kaxuyq", "pait kahuyq", "derevyana mebel", "derevyanaya mebel",
+    "mebel erivan", "mebel armenia"
+  ],
   authors: [{ name: "HSH Furniture" }],
-  alternates: {
-    canonical: "/",
-    // languages: { "hy-AM": "/", "ru-RU": "/ru" }, // add when you have Russian
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     title: "HSH Furniture | Ձեռագործ Փայտե Կահույք",
-    description: "Բարձրորակ ձեռագործ կահույք՝ պատրաստված սիրով և փորձով",
+    description:
+      "Ձեռագործ փայտե կահույք Երևանում․ Մահճակալներ, պահարաններ, խոհանոցային կահույք՝ բարձր որակով։",
     url: "https://hshfurnitures.com",
     siteName: "HSH Furniture",
     images: [
@@ -27,7 +47,7 @@ export const metadata: Metadata = {
         url: "/gallery-images/gallery-image-1.jpg",
         width: 1200,
         height: 630,
-        alt: "HSH Furniture – Ձեռագործ փայտե կահույք",
+        alt: "Wooden furniture handmade in Armenia | Ձեռագործ փայտե կահույք",
       },
     ],
     locale: "hy_AM",
@@ -36,7 +56,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "HSH Furniture | Ձեռագործ Փայտե Կահույք",
-    description: "20+ տարվա փորձ, բարձր որակ, անհատական պատվերներ",
     images: ["/gallery-images/gallery-image-1.jpg"],
   },
   robots: {
@@ -54,25 +73,35 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "HSH Furniture",
+  alternateName: [
+    "Handmade Wooden Furniture Armenia",
+    "Деревянная мебель Армения",
+    "Dzerragorc payte kahuyq",
+    "Derevyannaya mebel",
+    "Payte kahuyq",
+    "Mebel Yerevan"
+  ],
   url: "https://hshfurnitures.com",
   logo: "https://hshfurnitures.com/hsh-logo.svg",
-  description: "Ձեռագործ փայտե կահույքի արտադրություն և վաճառք Հայաստանում",
+  description:
+    "Ձեռագործ փայտե կահույք Հայաստանում։ Մահճակալներ, պահարաններ, սեղաններ, գրասենյակային և հյուրանոցային կահույք՝ պատվերով և բարձր որակով։",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Երևան",
+    addressLocality: "Masis",
+    addressRegion: "Ararat",
     addressCountry: "AM",
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+374-XX-XXX-XXX", // replace
+    telephone: "+374-77-803-778",
     contactType: "Customer Service",
-    areaServed: "AM",
-    availableLanguage: ["Armenian", "Russian"],
+    areaServed: ["Armenia", "AM", "Հայաստան", "Армения"],
+    availableLanguage: ["Armenian", "Russian", "English"],
   },
   sameAs: [
-    "https://facebook.com/yourpage",
-    "https://instagram.com/yourpage",
-  ],
+    "https://www.facebook.com/hsh.furnitures/",
+    "https://www.instagram.com/hsh_furnitures/"
+  ]
 };
 
 export default function RootLayout({

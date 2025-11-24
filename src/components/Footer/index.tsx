@@ -8,10 +8,10 @@ export default function Footer() {
          <div className={styles.content}>
             <p className={styles.text}>Made with love</p>
             <div className={styles.socials}>
-               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+               <a href="https://www.facebook.com/hsh.furnitures/" target="_blank" rel="noopener noreferrer">
                   <img src="/icons/facebook-f-999.svg" alt="Facebook" className={styles.smIcon} />
                </a>
-               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+               <a href="https://www.instagram.com/hsh_furnitures/" target="_blank" rel="noopener noreferrer">
                   <img src="/icons/instagram-999.svg" alt="Instagram" className={styles.smIcon} />
                </a>
             </div>

@@ -35,10 +35,10 @@ export default function GalleryHeaderClient({ initialCategories }: Props) {
 
             <div className={styles.rightGroup}>
                <div className={styles.smLinks}>
-                  <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <a href="https://www.facebook.com/hsh.furnitures/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                      <Image src="/icons/facebook-f-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                   </a>
-                  <a href="https://instagram.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <a href="https://www.instagram.com/hsh_furnitures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                      <Image src="/icons/instagram-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                   </a>
                </div>
@@ -69,10 +69,10 @@ export default function GalleryHeaderClient({ initialCategories }: Props) {
             ))}
 
             <div className={styles.mobileSmLinks}>
-               <a href="https://facebook.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+               <a href="https://www.facebook.com/hsh.furnitures/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <Image src="/icons/facebook-f-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                </a>
-               <a href="https://instagram.com/yourpage" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+               <a href="https://www.instagram.com/hsh_furnitures/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <Image src="/icons/instagram-111.svg" alt="" width={24} height={24} className={styles.smIcon} />
                </a>
             </div>
