@@ -81,7 +81,7 @@ export default async function CategoryPage({
     };
 
     return (
-        <>
+        <div className={styles.pageWrapper}>
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
@@ -89,16 +89,20 @@ export default async function CategoryPage({
             <Frame />
             <GalleryHeader />
             {items.length === 0 ? (
-                <main className={styles.emptyState}>
-                    <p className={styles.emptyMessage}>
-                        <strong>{cat.name}ում դեռևս նկարներ չկան</strong>
-                    </p>
+                <main className={styles.mainContent}>
+                    <div className={styles.emptyState}>
+                        <p className={styles.emptyMessage}>
+                            <strong>{cat.name}ում դեռևս նկարներ չկան</strong>
+                        </p>
+                    </div>
                 </main>
             ) : (
-                <GalleryContent items={items} />
+                <main className={styles.mainContent}>
+                    <GalleryContent items={items} />
+                </main>
             )}
             <Footer />
             <BackToTopButton />
-        </>
+        </div>
     );
 }

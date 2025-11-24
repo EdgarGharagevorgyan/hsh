@@ -33,7 +33,7 @@ export default function GalleryContent({ items }: Props) {
    return (
       <main className={styles.container}>
          {/* H1 = #1 SEO signal */}
-         <h1 className={styles.title}>{title} HSH Furniture</h1>
+         <h1 className={styles.title}>{title}</h1>
 
          <div className={styles.grid}>
             {items.map((img) => {
