@@ -32,14 +32,14 @@ export default function Header() {
                   <Link href="/gallery">ԳԱԼԵՐԻԱ</Link>
                </nav>
                <div className={styles.smLinks}>
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.facebook.com/hsh.furnitures/" target="_blank" rel="noopener noreferrer">
                      <img
                         src="/icons/facebook-f-111.svg"
                         alt="Facebook"
                         className={styles.smIcon}
                      />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.instagram.com/hsh_furnitures/" target="_blank" rel="noopener noreferrer">
                      <img
                         src="/icons/instagram-111.svg"
                         alt="Instagram"
@@ -74,14 +74,14 @@ export default function Header() {
                   <Link href="/gallery">ԳԱԼԵՐԻԱ</Link>
                </nav>
                <div className={styles.smLinks}>
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.facebook.com/hsh.furnitures/" target="_blank" rel="noopener noreferrer">
                      <img
                         src="/icons/facebook-f-111.svg"
                         alt="Facebook"
                         className={styles.smIcon}
                      />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  <a href="https://www.instagram.com/hsh_furnitures/" target="_blank" rel="noopener noreferrer">
                      <img
                         src="/icons/instagram-111.svg"
                         alt="Instagram"
