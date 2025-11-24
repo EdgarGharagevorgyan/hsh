@@ -9,7 +9,7 @@ import Frame from "@/components/Frame";
 import styles from "../gallery.module.scss";
 import { categorySchema } from "@/shared/schemas/category.schema";
 
-type ImageItem = { url: string; filename: string };
+type ImageItem = { url: string; filename: string; imgAlt?: string; };
 
 export const dynamic = "force-dynamic";
 export const revalidate = false;

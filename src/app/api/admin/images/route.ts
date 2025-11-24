@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { s3, BUCKET, PUBLIC_URL } from "@/lib/r2";
 import { ListObjectsV2Command } from "@aws-sdk/client-s3";
+import { categorySchema } from "@/shared/schemas/category.schema"; 
 
 export async function GET(request: Request) {
    const { searchParams } = new URL(request.url);
@@ -13,7 +14,7 @@ export async function GET(request: Request) {
 
    const response = await s3.send(command);
 
-   const imagesBy: Record<string, { filename: string; url: string }[]> = {};
+   const imagesBy: Record<string, { filename: string; url: string; imgAlt: string }[]> = {};
 
    (response.CommonPrefixes || []).forEach(prefixObj => {
       const cat = prefixObj.Prefix!.slice(0, -1);
@@ -30,9 +31,11 @@ export async function GET(request: Request) {
       const cat = parts[0];
       const filename = parts.slice(1).join("/");
       if (!imagesBy[cat]) imagesBy[cat] = [];
+      const catObj = Object.values(categorySchema).find(c => c.slug === cat);
       imagesBy[cat].push({
          filename,
-         url: `${PUBLIC_URL}/${obj.Key}`
+         url: `${PUBLIC_URL}/${obj.Key}`,
+         imgAlt: catObj?.imgAlt || cat, 
       });
    });
 
