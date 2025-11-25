@@ -2,32 +2,28 @@
 
 import { useRouter } from "next/navigation";
 import styles from "./ContentProducts.module.scss";
+import { categorySchema } from "@/shared/schemas/category.schema";
 
 const productItems = [
-   { name: "ՊԱՀԱՐԱՆ", image: "/product-categories/wardrobe.png" },
-   { name: "ՄԱՀՃԱԿԱԼ", image: "/product-categories/bed.png" },
-   { name: "ԽՈՀԱՆՈՑԱՅԻՆ ԿԱՀՈՒՅՔ", image: "/product-categories/cooking.png" },
-   { name: "ՍԵՂԱՆ", image: "/product-categories/desk.png" },
-   { name: "ԱԹՈՌ", image: "/product-categories/chair.png" },
-   { name: "ԼՈԳԱՐԱՆԻ ԿԱՀՈՒՅՔ", image: "/product-categories/sink.png" },
-   { name: "ՀԵՌՈՒՍՏԱՑՈՒՅՑԻ ՏԱԿԴԻՐ", image: "/product-categories/tv-stand.png" },
-   { name: "ՀՅՈՒՐԱՆՈՑԱՅԻՆ ԿԱՀՈՒՅՔ", image: "/product-categories/guestroom.png" },
-   { name: "ՕՐՈՐՈՑ", image: "/product-categories/cradle.png" },
-   { name: "ԳՐԱՍԵՆՅԱԿԻ ԿԱՀՈՒՅՔ", image: "/product-categories/office.png" },
-   { name: "ՓԱՅՏՅԱ ԱՔՍԵՍՈՒԱՌՆԵՐ", image: "/product-categories/house.png" },
-   { name: "ԱՆՀԱՏԱԿԱՆ ՊԱՏՎԵՐՆԵՐ", image: "/product-categories/hammering.png" },
+   { name: "ՊԱՀԱՐԱՆ", key: "wardrobe", image: "/product-categories/wardrobe.png" },
+   { name: "ՄԱՀՃԱԿԱԼ", key: "bed", image: "/product-categories/bed.png" },
+   { name: "ԽՈՀԱՆՈՑԱՅԻՆ ԿԱՀՈՒՅՔ", key: "kitchen", image: "/product-categories/cooking.png" },
+   { name: "ՍԵՂԱՆ", key: "table", image: "/product-categories/desk.png" },
+   { name: "ԱԹՈՌ", key: "chairs", image: "/product-categories/chair.png" },
+   { name: "ԼՈԳԱՐԱՆԻ ԿԱՀՈՒՅՔ", key: "bathroom", image: "/product-categories/sink.png" },
+   { name: "ՀԵՌՈՒՍՏԱՑՈՒՅՑԻ ՏԱԿԴԻՐ", key: "tvstand", image: "/product-categories/tv-stand.png" },
+   { name: "ՀՅՈՒՐԱՆՈՑԱՅԻՆ ԿԱՀՈՒՅՔ", key: "hotel", image: "/product-categories/guestroom.png" },
+   { name: "ՕՐՈՐՈՑ", key: "cradle", image: "/product-categories/cradle.png" },
+   { name: "ԳՐԱՍԵՆՅԱԿԻ ԿԱՀՈՒՅՔ", key: "office", image: "/product-categories/office.png" },
+   { name: "ՓԱՅՏՅԱ ԱՔՍԵՍՈՒԱՌՆԵՐ", key: "wooden", image: "/product-categories/house.png" },
+   { name: "ԱՆՀԱՏԱԿԱՆ ՊԱՏՎԵՐՆԵՐ", key: "customorders", image: "/product-categories/hammering.png" },
 ];
 
 export default function ContentProducts() {
    const router = useRouter();
 
-   function formatName(str: string) {
-      const lower = str.toLowerCase();
-      return lower.charAt(0).toUpperCase() + lower.slice(1);
-   }
-
    return (
-      <div id="clients" className={styles.productsContainer}>
+      <div id="services" className={styles.productsContainer}>
          <div className={styles.productsInfo}>
             <h2>Ապրանքատեսակներ</h2>
             <span className={styles.line}></span>
@@ -39,16 +35,14 @@ export default function ContentProducts() {
 
          <ul className={styles.productsTable}>
             {productItems.map((item, index) => {
-               const formatted = formatName(item.name);
+               const category = categorySchema[item.key];
 
                return (
                   <li
                      key={index}
                      className={styles.productItem}
                      style={{ ["--bg" as string]: `url(${item.image})` }}
-                     onClick={() =>
-                        router.push(`/gallery/${encodeURIComponent(formatted)}`)
-                     }
+                     onClick={() => router.push(`/gallery/${category.slug}`)}
                   >
                      <span>{item.name}</span>
                   </li>

@@ -10,8 +10,8 @@ export default function Content() {
       <>
          <ContentInfo />
          <ContentGallery />
-         <ContentComment />
          <ContentProducts />
+         <ContentComment />
          <ContentMap />
       </>
    );

@@ -3,7 +3,7 @@ import styles from "./ContentComment.module.scss";
 
 export default function ContentComment() {
    return (
-      <div id="services" className={styles.contentCommentContainer}>
+      <div id="clients" className={styles.contentCommentContainer}>
          <div className={styles.comment}>
             <q>
                Ես անչափ ուրախ եմ մեր համագործակցության արդյունքներով։ Ձեր թիմը իսկապես հասկանում է,
