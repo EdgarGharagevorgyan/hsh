@@ -13,20 +13,10 @@ import Footer from "@/components/Footer";
 import BackToTopButton from "@/src/components/BackToTopButton";
 
 export default function HomeClient() {
-   const [isLoading, setIsLoading] = useState(true);
-   const [isDesktop, setIsDesktop] = useState(true);
+   const [isLoading, setIsLoading] = useState(false);
 
    useEffect(() => {
-      const handleResize = () => {
-         setIsDesktop(window.innerWidth > 1060);
-      };
-
-      handleResize(); // initial check
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-   }, []);
-
-   useEffect(() => {
+      setIsLoading(true);
       const timeout = setTimeout(() => setIsLoading(false), 1500);
       return () => clearTimeout(timeout);
    }, []);
@@ -42,7 +32,14 @@ export default function HomeClient() {
             }}
          >
             <Frame />
-            {isDesktop ? <Header /> : <MobileHeader />}
+
+            <div className={styles.desktopOnly}>
+               <Header />
+            </div>
+            <div className={styles.mobileOnly}>
+               <MobileHeader />
+            </div>
+
             <Content />
             <Footer />
             <BackToTopButton />

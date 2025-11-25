@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next";
 import "./globals.scss";
-import { SessionProvider } from "next-auth/react";
+import { Providers } from "@/src/components/Providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hshfurnitures.com"),
@@ -110,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="hy" >
+    <html lang="hy" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#ffffff" />
         <link rel="icon" href="/favicon.ico" />
@@ -119,8 +119,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body>
-        <SessionProvider>{children}</SessionProvider>
+      <body suppressHydrationWarning>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
